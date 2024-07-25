@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Instalação
 Você pode clonar este repositório OU baixar o .zip
 
@@ -31,3 +32,6 @@ class Usuario extends Model {
 
 }
 ```
+=======
+# devsbook
+>>>>>>> 30315990fe8de4bf95f70befffbdec80cbace764
