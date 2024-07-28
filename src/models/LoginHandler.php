@@ -37,12 +37,33 @@ class LoginHandler{
                     ->set('token', $token)
                     ->where('email', $email)
                 ->execute();
-            
+                                      
                 return $token;
             }
         }
 
         return false;
+    }
+
+    public static function emailExite($email){
+        $usuario = Usuario::select()->where('email', $email)->one();
+        return $usuario ? true : false;
+    }
+
+    public static function addUsuario($name, $email, $password, $datanasc){
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $token = bin2hex(random_bytes(16));
+
+        Usuario::insert([
+            'email' => $email,
+            'name' => $name,
+            'password' => $hash,
+            'datanasc' => $datanasc,
+            'token' => $token
+        ])->execute();
+
+        return $token;
+
     }
 }
 

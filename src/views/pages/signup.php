@@ -14,19 +14,35 @@
     </header>
     <section class="container main">
     
-        <form method="POST" action="<?=$base;?>/login">
+        <form method="POST" action="<?=$base;?>/cadastro">
             <?php if(!empty($flash)): ?>
                 <div class="flash"><?php echo $flash; ?></div>
             <?php endif; ?>
             
-            <input placeholder="Digite seu e-mail" class="input" type="email" name="email" />
+            <input placeholder="Digite seu Nome Completo" class="input" type="text" name="name" />
 
-            <input placeholder="Digite sua senha" class="input" type="password" name="password" />
+            <input placeholder="Digite sua Data de Nascimento" class="input" type="text" name="datanasc" id="datanasc"/>
 
-            <input class="button" type="submit" value="Acessar o sistema" />
+            <input placeholder="Digite seu E-mail" class="input" type="email" name="email" />
 
-            <a href="<?=$base;?>/cadastro">Ainda não tem conta? Cadastre-se</a>
+            <input placeholder="Digite sua Senha" class="input" type="password" name="password" />
+
+            <input class="button" type="submit" value="Fazer Cadastro" />
+
+            <a href="<?=$base;?>/login">Já tem conta? Faça o login</a>
         </form>
     </section>
+
+<script src="https://unpkg.com/imask"></script>
+<script>
+IMask(
+    document.getElementById('datanasc'),
+    {
+        mask: '00/00/0000'
+    }
+
+)
+
+</script>
 </body>
 </html>
