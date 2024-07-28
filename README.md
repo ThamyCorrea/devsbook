@@ -24,7 +24,7 @@ O Devsbook foi desenvolvido seguindo a arquitetura MVC (Model-View-Controller), 
 - **View**: Responsável pela apresentação dos dados e interface do usuário.
 - **Controller**: Gerencia a comunicação entre o Model e a View, processando as requisições do usuário.
 
-##Desenvolvido junto ao projeto do curso B7Web
+## Desenvolvido junto ao projeto do curso B7Web
 
 
 
