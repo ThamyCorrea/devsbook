@@ -4,6 +4,7 @@ namespace src\models;
 
 use \src\models\Usuario;
 
+
 class LoginHandler{
 
     public static function checkLogin(){
@@ -25,6 +26,24 @@ class LoginHandler{
         return false;
     }
 
+    public static function verificarLogin($email, $password){
+        $usuario = Usuario::select()->where('email', $email)->one();
+
+        if($usuario){
+            if(password_verify($password, $usuario['password'])){
+                $token = bin2hex(random_bytes(16));
+
+                Usuario::update()
+                    ->set('token', $token)
+                    ->where('email', $email)
+                ->execute();
+            
+                return $token;
+            }
+        }
+
+        return false;
+    }
 }
 
 
