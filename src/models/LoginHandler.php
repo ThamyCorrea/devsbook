@@ -16,9 +16,9 @@ class LoginHandler{
 
                 $loginUsuario = new Usuario();
                 $loginUsuario->id = $data['id'];
-                $loginUsuario->email = $data['email'];
-                $loginUsuario->name = $data['name'];
-
+                $loginUsuario->nome = $data['nome'];
+                $loginUsuario->fotoPerfil = $data['fotoPerfil'];
+                
                 return $loginUsuario;
             } 
         }
@@ -26,11 +26,11 @@ class LoginHandler{
         return false;
     }
 
-    public static function verificarLogin($email, $password){
+    public static function verificarLogin($email, $senha){
         $usuario = Usuario::select()->where('email', $email)->one();
 
         if($usuario){
-            if(password_verify($password, $usuario['password'])){
+            if(password_verify($senha, $usuario['senha'])){
                 $token = bin2hex(random_bytes(16));
 
                 Usuario::update()
@@ -45,19 +45,19 @@ class LoginHandler{
         return false;
     }
 
-    public static function emailExite($email){
+    public static function emailExiste($email){
         $usuario = Usuario::select()->where('email', $email)->one();
         return $usuario ? true : false;
     }
 
-    public static function addUsuario($name, $email, $password, $datanasc){
-        $hash = password_hash($password, PASSWORD_DEFAULT);
+    public static function addUsuario($nome, $email, $senha, $datanasc){
+        $hash = password_hash($senha, PASSWORD_DEFAULT);
         $token = bin2hex(random_bytes(16));
 
         Usuario::insert([
             'email' => $email,
-            'name' => $name,
-            'password' => $hash,
+            'nome' => $nome,
+            'senha' => $hash,
             'datanasc' => $datanasc,
             'token' => $token
         ])->execute();

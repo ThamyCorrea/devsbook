@@ -21,7 +21,7 @@
             
             <input placeholder="Digite seu e-mail" class="input" type="email" name="email" />
 
-            <input placeholder="Digite sua senha" class="input" type="password" name="password" />
+            <input placeholder="Digite sua senha" class="input" type="password" name="senha" />
 
             <input class="button" type="submit" value="Acessar o sistema" />
 

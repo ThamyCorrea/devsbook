@@ -17,10 +17,10 @@ class LoginController extends Controller {
     
     public function signinAction(){
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-        $password = filter_input(INPUT_POST, 'password');
+        $senha = filter_input(INPUT_POST, 'senha');
 
-        if($email && $password){
-            $token = LoginHandler::verificarLogin($email, $password);
+        if($email && $senha){
+            $token = LoginHandler::verificarLogin($email, $senha);
             if($token){
                 $_SESSION['token'] = $token;
                 $this->redirect('/');
@@ -47,14 +47,14 @@ class LoginController extends Controller {
    }  
    
    public function signupAction(){
-    $name = filter_input(INPUT_POST, 'nome');
+    $nome = filter_input(INPUT_POST, 'nome');
     $datanasc = filter_input(INPUT_POST, 'datanasc');
-    $email = filter_input(INPUT_POST, 'email, FILTER_VALIDATE_EMAIL');
-    $password = filter_input(INPUT_POST, 'password');
+    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    $senha = filter_input(INPUT_POST, 'senha');
 
-    if($name && $datanasc && $email && $password){
+    if($nome && $datanasc && $email && $senha){
         $datanasc = explode('/', $datanasc);
-        if(count($datanasc) !== 3){
+        if(count($datanasc) != 3){
             $_SESSION['flash'] = 'Data de nascimento inválida';
             $this->redirect('/cadastro');
         }
@@ -62,20 +62,20 @@ class LoginController extends Controller {
         $datanasc = $datanasc[2].'-'.$datanasc[1].'-'.$datanasc[0];
         if(strtotime($datanasc) === false){
             $_SESSION['flash'] = 'Data de nascimento inválida';
-            $this->redirect('/cadastro');
+             $this->redirect('/cadastro');             
         }
 
-        if(LoginHandler::emailExite($email) === false){
-            $token = LoginHandler::addUsuario($name, $email, $password, $datanasc);
+        if(LoginHandler::emailExiste($email) === false){
+            $token = LoginHandler::addUsuario($nome, $email, $senha, $datanasc);
             $_SESSION['token'] = $token;
-            $this->redirect('/');
+           $this->redirect('/');
         }else{
            $_SESSION['flash'] = 'Email já cadastrado!';
            $this->redirect('/cadastro');
         }
 
     }else{
-        $this->redirect('/cadastro');
+         $this->redirect('/cadastro');
     }
 
 }

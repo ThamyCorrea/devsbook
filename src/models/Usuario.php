@@ -6,6 +6,7 @@ class Usuario extends Model {
 
     public $id;
     public $email;
-    public $name;
+    public $nome;
+    public $fotoPerfil;
 }
 

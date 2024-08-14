@@ -19,13 +19,13 @@
                 <div class="flash"><?php echo $flash; ?></div>
             <?php endif; ?>
             
-            <input placeholder="Digite seu Nome Completo" class="input" type="text" name="name" />
+            <input placeholder="Digite seu Nome Completo" class="input" type="text" name="nome" />
 
             <input placeholder="Digite sua Data de Nascimento" class="input" type="text" name="datanasc" id="datanasc"/>
 
             <input placeholder="Digite seu E-mail" class="input" type="email" name="email" />
 
-            <input placeholder="Digite sua Senha" class="input" type="password" name="password" />
+            <input placeholder="Digite sua Senha" class="input" type="password" name="senha" />
 
             <input class="button" type="submit" value="Fazer Cadastro" />
 
