@@ -11,5 +11,6 @@ class Post extends Model {
     public $tipo;
     public $data_post;
     public $body;
+    public $meu;
 
 }

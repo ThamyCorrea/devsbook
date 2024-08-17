@@ -23,7 +23,8 @@ class PostHandler{
         }
     }
 
-    public static function getHomeFeed($idUsuario){ //pega a lista de ususarios que EU sigo
+    public static function getHomeFeed($idUsuario, $page){ 
+        $perPage = 2;
         //pega a lista de ususarios que EU sigo
         $listaUsuarios = RelacaoUsuario::select()->where('de_usuario', $idUsuario )->get();
         $usuarios = [];
@@ -36,7 +37,14 @@ class PostHandler{
         $postList = Post::select()
             ->where('id_usuario', 'in', $usuarios)
             ->orderBy('data_post', 'desc')
+            ->page($page, $perPage)
         ->get();
+
+        $total = Post::select()
+            ->where('id_usuario', 'in', $usuarios)
+        ->count();
+        $totalPagina = ceil($total / $perPage);
+       
 
          //transformar o resultado em objetos reais(models)
         $posts = [];
@@ -46,6 +54,11 @@ class PostHandler{
             $newPost->tipo = $postItem['tipo'];
             $newPost->data_post = $postItem['data_post'];
             $newPost->body = $postItem['body'];
+            $newPost->meu = false;
+
+            if($postItem['id_usuario'] == $idUsuario){
+                $newPost->meu = true;
+            }
 
             //preencher as informações dos usuarios
             $novoUsuario = Usuario::select()->where('id', $postItem['id_usuario'])->one();
@@ -55,11 +68,20 @@ class PostHandler{
             $newPost->usuario->fotoPerfil = $novoUsuario['fotoPerfil'];
 
             //preencher informações do LIKE
+            $newPost->qntLike = 0;
+            $newPost->liked = false;
+
+            //preencher informações de comentarios
+            $newPost->comentarios = [];
 
             $posts[] = $newPost; 
         }
 
-        return $posts;       
+        return [
+            'posts' => $posts,
+            'totalPagina' => $totalPagina,
+            'currentPage' =>$page
+        ];       
     }
 
 

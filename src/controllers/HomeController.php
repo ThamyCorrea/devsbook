@@ -19,9 +19,11 @@ class HomeController extends Controller {
     }
 
     public function index() {
+        $page = intval(filter_input(INPUT_GET, 'page'));
 
         $feed = PostHandler::getHomeFeed(
-            $this->loginUsuario->id
+            $this->loginUsuario->id,
+            $page
         );
     
 

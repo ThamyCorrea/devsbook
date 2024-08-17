@@ -10,12 +10,18 @@
                 
             <?=$render('feed-editor', ['usuario'=>$loginUsuario]);?>
 
-            <?php foreach($feed as $feedItem): ?>
+            <?php foreach($feed['posts'] as $feedItem): ?>
                 <?=$render('feed-item', [
-                    'data' => $feedItem
+                    'data' => $feedItem,
+                    'loginUsuario' => $loginUsuario
                 ]);?>
             <?php endforeach; ?>
-            
+
+            <div class="feed-pagination">
+                <?php for($q=0;$q<$feed['totalPagina'];$q++): ?>
+                    <a class="<?=($q==$feed['currentPage'] ? 'active' : '' );?>"href="<?=$base;?>/?page=<?=$q;?>"><?=$q+1;?></a>                
+                <?php endfor;?>
+            </div>            
 
             </div>
             <div class="column side pl-5">

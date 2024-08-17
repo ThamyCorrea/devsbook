@@ -27,11 +27,12 @@
             <?=nl2br($data->body);?>
         </div>
         <div class="feed-item-buttons row mt-20 m-width-20">
-            <div class="like-btn on">56</div>
-            <div class="msg-btn">3</div>
+            <div class="like-btn <?=($data->liked ? 'on' : '');?>"><?=$data->qntLike;?></div>
+            <div class="msg-btn"><?=count($data->comentarios);?></div>
         </div>
         <div class="feed-item-comments">
 
+            <!--
             <div class="fic-item row m-height-10 m-width-20">
                 <div class="fic-item-photo">
                     <a href="<?=$base;?>"><img src="<?=$base;?>/media/avatars/<?=$data->usuario->fotoPerfil;?>" /></a>
@@ -41,20 +42,11 @@
                     Comentando no meu próprio post
                 </div>
             </div>
-
-            <div class="fic-item row m-height-10 m-width-20">
-                <div class="fic-item-photo">
-                    <a href="<?=$base;?>"><img src="<?=$base;?>/media/avatars/<?=$data->usuario->fotoPerfil;?>" /></a>
-                </div>
-                <div class="fic-item-info">
-                    <a href="">Bonieky Lacerda</a>
-                    Muito legal, parabéns!
-                </div>
-            </div>
+            -->
 
             <div class="fic-answer row m-height-10 m-width-20">
                 <div class="fic-item-photo">
-                    <a href="<?=$base;?>"><img src="<?=$base;?>/media/avatars/<?=$data->usuario->fotoPerfil;?>" /></a>
+                    <a href="<?=$base;?>"><img src="<?=$base;?>/media/avatars/<?=$loginUsuario->fotoPerfil;?>" /></a>
                 </div>
                 <input type="text" class="fic-item-field" placeholder="Escreva um comentário" />
             </div>
