@@ -4,7 +4,7 @@ namespace src\controllers;
 
 
 use \core\Controller;
-use \src\models\LoginHandler;
+use \src\models\UsuarioHandler;
 use \src\controllers\PostHandler;
 
 
@@ -13,7 +13,7 @@ class PostController extends Controller{
     private $loginUsuario;
 
     public function __construct(){
-        $this->loginUsuario = LoginHandler::checkLogin();
+        $this->loginUsuario = UsuarioHandler::checkLogin();
         if($this->loginUsuario === false){
            $this->redirect('/login');
         }
