@@ -4,8 +4,8 @@ namespace src\models;
 
 use \src\models\Usuario;
 use \src\models\RelacaoUsuario;
-
-
+use \src\controllers\PostController;
+use src\controllers\PostHandler;
 
 class UsuarioHandler{
 
@@ -103,6 +103,8 @@ class UsuarioHandler{
                 }
 
                 //foto
+                $fotos = PostHandler::getFotos($id);
+                $usuario->fotos = $fotos;
             }
             
             return $usuario;

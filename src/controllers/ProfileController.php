@@ -19,6 +19,8 @@ class ProfileController extends Controller {
     }
 
     public function index($arg = []) {
+        $page = intval(filter_input(INPUT_GET, 'page'));
+
         $id = $this->loginUsuario->id;
 
         if(!empty($arg['id'])){
@@ -29,12 +31,24 @@ class ProfileController extends Controller {
 
         if(!$usuario){
             $this->redirect('/');
-        }       
+        } 
+        
+        $dataAniv = new \DateTime($usuario->datanasc);
+        $dataAtual = new \DateTime('today');
+
+        $usuario->idade = $dataAniv->diff($dataAtual)->y;
+
+        $feed = PostHandler::getFeedUsuario(
+            $id, 
+            $page, 
+            $this->loginUsuario->id
+        );
 
         $this->render('profile',[
             'loginUsuario' => $this->loginUsuario,
-            'usuario'=> $usuario
-    ]);
+            'usuario'=> $usuario,
+            'feed' => $feed
+        ]);
     
     }
 }

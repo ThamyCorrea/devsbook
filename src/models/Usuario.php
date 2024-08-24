@@ -15,5 +15,6 @@ class Usuario extends Model {
     public $seguidores;
     public $seguindo;
     public $fotos;
+    public $idade;
 }
 
