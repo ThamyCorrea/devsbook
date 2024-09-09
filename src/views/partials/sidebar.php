@@ -30,7 +30,7 @@
                             Amigos
                         </div>
                         <div class="menu-item-badge">
-                            33
+                            0
                         </div>
                     </div>
                 </a>

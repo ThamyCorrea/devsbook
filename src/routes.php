@@ -19,4 +19,4 @@ $router->get('/perfil', 'ProfileController@index');
 
 // $router->get('/pesquisa');
 
-// $router->get('/sair');
+$router->get('/sair', 'LoginController@logout');
